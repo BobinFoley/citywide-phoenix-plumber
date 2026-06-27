@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site.js';
+---
+<Layout
+  title="Contact Citywide Phoenix Plumber | Call or Request Service"
+  description="Reach Citywide Phoenix Plumber 24/7. Call or request service online for drains, water heaters, leaks, and plumbing emergencies across the Valley."
+  active="contact"
+>
+  <section class="page-hero">
+    <svg class="pipe-bg" viewBox="0 0 400 360" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" aria-hidden="true" style="position:absolute;right:-60px;top:-40px;width:380px"><path d="M40 60 h180 a40 40 0 0 1 40 40 v60 a40 40 0 0 0 40 40 h60"/></svg>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href={import.meta.env.BASE_URL}>Home</a><span>/</span> Contact</nav>
+      <span class="eyebrow">Get in touch</span>
+      <h1>Let's get your plumbing sorted</h1>
+      <p>Call any hour for the fastest response, or send a request and we'll get right back to you with a time and an upfront quote.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap contact-grid">
+      <div class="contact-methods reveal">
+        <div class="cmethod">
+          <span class="ic"><Icon name="phone" size={22} /></span>
+          <div><h3>Call or text</h3><a href={site.phoneHref}>{site.phone}</a><p style="color:var(--muted);font-size:.88rem">Real plumber answers, 24/7</p></div>
+        </div>
+        <div class="cmethod">
+          <span class="ic"><Icon name="mail" size={22} /></span>
+          <div><h3>Email</h3><a href={`mailto:${site.email}`}>{site.email}</a></div>
+        </div>
+        <div class="cmethod">
+          <span class="ic"><Icon name="clock" size={22} /></span>
+          <div><h3>Hours</h3><p>Emergencies: 24 / 7<br />Office: Mon–Sat, 7a–7p<br />Sunday: emergency only</p></div>
+        </div>
+        <div class="cmethod">
+          <span class="ic"><Icon name="pin" size={22} /></span>
+          <div><h3>Service area</h3><p>Phoenix &amp; all of metro: {site.cities.slice(1).join(', ')}</p></div>
+        </div>
+      </div>
+
+      <div class="form-card reveal">
+        <h2>Request service</h2>
+        <p style="color:var(--muted);margin-top:.4rem">Tell us what's going on and we'll reach out fast.</p>
+        <form id="contactForm" action={site.formEndpoint} method="POST">
+          <div class="field">
+            <label for="name">Name</label>
+            <input type="text" id="name" name="name" autocomplete="name" required />
+          </div>
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" required />
+          </div>
+          <div class="field">
+            <label for="service">What do you need?</label>
+            <select id="service" name="service">
+              <option>Drain &amp; sewer</option>
+              <option>Water heater</option>
+              <option>Leak repair</option>
+              <option>Emergency / urgent</option>
+              <option>Something else</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">Describe the problem</label>
+            <textarea id="message" name="message" placeholder="e.g. Kitchen sink is draining slowly and gurgling…"></textarea>
+          </div>
+          <button type="submit" class="btn btn-call" style="width:100%;margin-top:18px">Send request</button>
+          <p class="form-note">For emergencies, calling is fastest — we answer 24/7 at {site.phone}.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Emergency right now?" text="Don't wait on a form — call and a plumber will be on the way.">
+    Open 24 hours · Serving all of metro Phoenix
+  </CtaBand>
+</Layout>

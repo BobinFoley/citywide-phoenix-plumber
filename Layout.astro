@@ -1,0 +1,75 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { site } from '../data/site.js';
+
+const { title, description, active } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <Header active={active} />
+  <main><slot /></main>
+  <Footer />
+
+  <script define:vars={{ email: site.email }}>
+    // Mobile menu toggle
+    const menuBtn = document.getElementById('menuBtn');
+    const navlinks = document.getElementById('navlinks');
+    if (menuBtn && navlinks) {
+      menuBtn.addEventListener('click', () => {
+        const open = navlinks.classList.toggle('open');
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      navlinks.addEventListener('click', (e) => {
+        if (e.target.tagName === 'A') {
+          navlinks.classList.remove('open');
+          menuBtn.setAttribute('aria-expanded', 'false');
+        }
+      });
+    }
+
+    // Scroll reveal (respects reduced motion)
+    const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const reveals = document.querySelectorAll('.reveal');
+    if (prefersReduced || !('IntersectionObserver' in window)) {
+      reveals.forEach((el) => el.classList.add('in'));
+    } else {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach((en) => {
+          if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+      reveals.forEach((el) => io.observe(el));
+    }
+
+    // Contact form: if no real endpoint is wired up, fall back to email.
+    const form = document.getElementById('contactForm');
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        const action = form.getAttribute('action') || '';
+        if (action.indexOf('your-form-id') !== -1 || action === '') {
+          e.preventDefault();
+          const name = (form.name.value || '').trim();
+          const phone = (form.phone.value || '').trim();
+          const service = form.service.value || '';
+          const message = (form.message.value || '').trim();
+          const subject = encodeURIComponent('Service request from ' + (name || 'website'));
+          const body = encodeURIComponent('Name: ' + name + '\nPhone: ' + phone + '\nService: ' + service + '\n\n' + message);
+          window.location.href = 'mailto:' + email + '?subject=' + subject + '&body=' + body;
+        }
+      });
+    }
+  </script>
+</body>
+</html>

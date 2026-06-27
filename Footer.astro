@@ -1,0 +1,46 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site.js';
+const base = import.meta.env.BASE_URL;
+const year = new Date().getFullYear();
+---
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <div class="foot-brand"><span class="mark"><Icon name="logo" size={20} /></span>{site.name}</div>
+        <p class="foot-blurb">Licensed, insured plumbing for Phoenix and the surrounding Valley. Honest quotes, lasting work, real people on the phone.</p>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <ul>
+          <li><a href={base + 'services#drain'}>Drain &amp; sewer</a></li>
+          <li><a href={base + 'services#water-heaters'}>Water heaters</a></li>
+          <li><a href={base + 'services#leaks'}>Leak repair</a></li>
+          <li><a href={base + 'services#emergency'}>24/7 emergency</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href={base + 'about'}>Why us</a></li>
+          <li><a href={base + 'service-area'}>Service area</a></li>
+          <li><a href={base + 'contact'}>Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Contact</h4>
+        <ul>
+          <li><a href={site.phoneHref}>{site.phone}</a></li>
+          <li><a href={`mailto:${site.email}`}>{site.email}</a></li>
+          <li>Phoenix, AZ · The Valley</li>
+          <li>{site.roc}</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© {year} {site.name}. All rights reserved.</span>
+      <span>Licensed &amp; insured · {site.roc}</span>
+    </div>
+  </div>
+</footer>

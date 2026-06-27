@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site.js';
+import { services } from '../data/services.js';
+const base = import.meta.env.BASE_URL;
+---
+<Layout
+  title="Citywide Phoenix Plumber | Licensed Plumbing & 24/7 Emergency Service"
+  description="Licensed, insured Phoenix plumbers. Drain & sewer, water heaters, leak repair, and 24/7 emergency service across the Valley. Upfront flat-rate pricing, same-day service."
+  active="home"
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div class="reveal">
+        <span class="eyebrow">Phoenix &amp; the Valley</span>
+        <h1>Plumbing done right, <span class="accent">the first time.</span></h1>
+        <p class="lede">Licensed Phoenix plumbers for drains, water heaters, and leaks — with a flat-rate price before any work begins.</p>
+        <div class="hero-cta">
+          <a class="btn btn-call" href={site.phoneHref}><Icon name="phone" size={18} />Call {site.phone}</a>
+          <a class="btn btn-ghost" href={base + 'services'}>See our services</a>
+        </div>
+        <div class="trust-row">
+          <span><Icon name="check" size={18} sw={2.2} /> Licensed &amp; insured</span>
+          <span><Icon name="check" size={18} sw={2.2} /> Upfront flat-rate pricing</span>
+          <span><Icon name="check" size={18} sw={2.2} /> Same-day service</span>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <svg class="pipe-bg" viewBox="0 0 400 360" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" aria-hidden="true"><path d="M40 60 h180 a40 40 0 0 1 40 40 v60 a40 40 0 0 0 40 40 h60"/><path d="M40 300 h120 a40 40 0 0 0 40 -40 v-40"/></svg>
+        <div class="panel">
+          <div class="panel-top"><span class="live-dot"></span><b>Dispatch live now</b><span class="sub">24 / 7 · 365</span></div>
+          <div class="metric"><span class="big">60</span><span class="unit">min</span></div>
+          <div class="metric-label">Average emergency response across metro Phoenix</div>
+          <div class="panel-list">
+            <div class="row"><span class="ic"><Icon name="check" size={16} sw={2.2} /></span> No after-hours surcharge games</div>
+            <div class="row"><span class="ic"><Icon name="check" size={16} sw={2.2} /></span> Price quoted before we start</div>
+            <div class="row"><span class="ic"><Icon name="check" size={16} sw={2.2} /></span> Clean, respectful, on time</div>
+          </div>
+        </div>
+        <div class="badge-float"><Icon name="shield" size={20} />Warranty backed</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES TEASER -->
+  <section class="surface-band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">What we fix</span>
+        <h2>Full-service plumbing for Phoenix homes</h2>
+        <p>From a slow kitchen drain to a burst line at 2 a.m., the same licensed crew handles it — no subcontractors, no surprises.</p>
+      </div>
+      <div class="cards">
+        {services.map((s) => (
+          <a class={`card reveal${s.urgent ? ' urgent' : ''}`} href={`${base}services#${s.id}`}>
+            <div class="ic"><Icon name={s.icon} size={26} sw={1.9} /></div>
+            <h3>{s.title}</h3>
+            <p>{s.blurb}</p>
+            <span class="tag">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY TEASER -->
+  <section class="why-band">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow">Why homeowners call us back</span>
+        <h2>Straightforward people, straightforward pricing</h2>
+        <p>Honest quotes and work that lasts — the kind of service we'd want in our own homes.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-item reveal"><div class="ic"><Icon name="shield-check" size={22} /></div><h3>Licensed &amp; insured</h3><p>Arizona ROC-licensed and fully insured on every job.</p></div>
+        <div class="why-item reveal"><div class="ic"><Icon name="dollar" size={22} /></div><h3>Flat-rate pricing</h3><p>You approve the price before we begin. No surprises.</p></div>
+        <div class="why-item reveal"><div class="ic"><Icon name="bolt" size={22} /></div><h3>Fast response</h3><p>Same-day appointments and true 24/7 dispatch.</p></div>
+        <div class="why-item reveal"><div class="ic"><Icon name="pin" size={22} /></div><h3>Local to Phoenix</h3><p>We know the homes, the hard water, and the heat.</p></div>
+      </div>
+      <div class="reveal" style="margin-top:36px"><a class="btn btn-ghost" href={base + 'about'} style="border-color:rgba(255,255,255,.25);color:#fff">More about us</a></div>
+    </div>
+  </section>
+
+  <CtaBand heading="Got a plumbing problem? Let's fix it today." text="Real plumbers answer 24/7 — call now for a fast, upfront quote." />
+</Layout>

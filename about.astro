@@ -1,0 +1,73 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+const base = import.meta.env.BASE_URL;
+
+const testimonials = [
+  { quote: "Water heater quit on a Sunday and they had hot water back by dinner. Quoted the price upfront and stuck to it.", who: 'Marcus R.', where: 'Arcadia, Phoenix' },
+  { quote: "Found a slab leak two other companies missed, showed me on the camera, and fixed it without tearing up half the house.", who: 'Dana & Phil T.', where: 'Gilbert' },
+];
+---
+<Layout
+  title="Why Choose Citywide Phoenix Plumber | Licensed, Honest, Local"
+  description="A licensed, insured, locally owned Phoenix plumbing company built on upfront flat-rate pricing and work that lasts. Meet the team that shows up on time."
+  active="about"
+>
+  <section class="page-hero">
+    <svg class="pipe-bg" viewBox="0 0 400 360" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" aria-hidden="true" style="position:absolute;right:-60px;top:-40px;width:380px"><path d="M40 60 h180 a40 40 0 0 1 40 40 v60 a40 40 0 0 0 40 40 h60"/></svg>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href={base}>Home</a><span>/</span> Why us</nav>
+      <span class="eyebrow">About</span>
+      <h1>A Phoenix plumber you can actually trust</h1>
+      <p>We started this company because we were tired of seeing neighbors get upsold, overcharged, and left guessing. Here's how we do it differently.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap story">
+      <div class="reveal">
+        <p>Citywide Phoenix Plumber is locally owned and operated, serving the Valley with the same crew on every job — no rotating subcontractors, no mystery technicians. When you call, you talk to a real plumber who knows Phoenix homes.</p>
+        <p>Our approach is simple: diagnose the problem honestly, quote a flat rate before we touch anything, and do the work right so you're not calling us back for the same issue. If something's better left alone, we'll tell you that too.</p>
+        <p>We're Arizona ROC-licensed, fully insured, and we treat your home like it's ours — drop cloths down, boots wiped, mess cleaned up before we leave. That's the standard we'd want for our own families, and it's the only one we know how to work to.</p>
+      </div>
+      <aside class="stat-card reveal">
+        <div class="stat"><div class="n">24/7</div><div class="l">Emergency dispatch, every day of the year</div></div>
+        <div class="stat"><div class="n">~60 min</div><div class="l">Average emergency response across metro Phoenix</div></div>
+        <div class="stat"><div class="n">Flat-rate</div><div class="l">Price approved before any work starts</div></div>
+        <div class="stat"><div class="n">Warranty</div><div class="l">Workmanship backed on every repair</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <section class="why-band">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">What sets us apart</span><h2>Four promises we don't break</h2></div>
+      <div class="why-grid">
+        <div class="why-item reveal"><div class="ic"><Icon name="shield-check" size={22} /></div><h3>Licensed &amp; insured</h3><p>Arizona ROC-licensed and fully insured, so you're protected on every job.</p></div>
+        <div class="why-item reveal"><div class="ic"><Icon name="dollar" size={22} /></div><h3>Flat-rate pricing</h3><p>You approve the price before we begin. No clock-watching, no surprise add-ons.</p></div>
+        <div class="why-item reveal"><div class="ic"><Icon name="bolt" size={22} /></div><h3>Fast response</h3><p>Same-day appointments and true 24/7 emergency dispatch across the Valley.</p></div>
+        <div class="why-item reveal"><div class="ic"><Icon name="pin" size={22} /></div><h3>Local to Phoenix</h3><p>We live and work here. We know the homes, the hard water, and the heat.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="surface-band">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">In their words</span><h2>What Valley homeowners say</h2></div>
+      <div class="quotes">
+        {testimonials.map((t) => (
+          <figure class="quote reveal">
+            <div class="stars" aria-label="5 out of 5 stars">
+              <Icon name="star" size={18} /><Icon name="star" size={18} /><Icon name="star" size={18} /><Icon name="star" size={18} /><Icon name="star" size={18} />
+            </div>
+            <p>{t.quote}</p>
+            <figcaption class="who">{t.who} <span>{t.where}</span></figcaption>
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Ready when you are." text="Call for a fast, upfront quote — or send a request and we'll get back to you." />
+</Layout>

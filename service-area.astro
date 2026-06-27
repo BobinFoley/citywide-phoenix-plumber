@@ -1,0 +1,46 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { site } from '../data/site.js';
+const base = import.meta.env.BASE_URL;
+---
+<Layout
+  title="Service Area | Plumbing Across Metro Phoenix & the Valley"
+  description="Citywide Phoenix Plumber serves Phoenix, Scottsdale, Tempe, Mesa, Chandler, Glendale, Gilbert, Peoria and the surrounding Valley with same-day and 24/7 service."
+  active="area"
+>
+  <section class="page-hero">
+    <svg class="pipe-bg" viewBox="0 0 400 360" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" aria-hidden="true" style="position:absolute;right:-60px;top:-40px;width:380px"><path d="M40 60 h180 a40 40 0 0 1 40 40 v60 a40 40 0 0 0 40 40 h60"/></svg>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href={base}>Home</a><span>/</span> Service area</nav>
+      <span class="eyebrow">Where we work</span>
+      <h1>Serving Phoenix and the whole Valley</h1>
+      <p>If you're in metro Phoenix, we can get to you — usually the same day. Not sure you're in range? One quick call settles it.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap area-grid">
+      <div class="reveal">
+        <span class="eyebrow">Cities we cover</span>
+        <h2 class="sec-head" style="margin-top:.9rem">Same crew, all across metro Phoenix</h2>
+        <p style="color:var(--muted);margin-top:.9rem;max-width:46ch">These are the areas we serve most often. We cover plenty of surrounding neighborhoods too, so call if you don't see yours.</p>
+        <ul class="area-list">
+          {site.cities.map((city) => (
+            <li><Icon name="check" size={16} sw={2.4} /> {city}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="area-map reveal">
+        <div class="big">All of metro Phoenix</div>
+        <div class="lbl">One call covers the Valley</div>
+        <a class="btn btn-call" style="margin-top:22px" href={site.phoneHref}><Icon name="phone" size={18} />Check my area</a>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="In the Valley? We've got you covered." text="Call now for same-day service, or send a request and we'll confirm your area.">
+    Open 24 hours for emergencies · <a href={base + 'contact'} style="color:#fff;text-decoration:underline">Request service online</a>
+  </CtaBand>
+</Layout>

@@ -1,0 +1,56 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Icon from '../components/Icon.astro';
+import CtaBand from '../components/CtaBand.astro';
+import { services } from '../data/services.js';
+const base = import.meta.env.BASE_URL;
+---
+<Layout
+  title="Plumbing Services in Phoenix | Drains, Water Heaters, Leaks & Emergency"
+  description="Drain & sewer, water heater repair and replacement, leak repair, and 24/7 emergency plumbing across metro Phoenix. Flat-rate pricing, licensed and insured."
+  active="services"
+>
+  <section class="page-hero">
+    <svg class="pipe-bg" viewBox="0 0 400 360" fill="none" stroke="currentColor" stroke-width="14" stroke-linecap="round" aria-hidden="true" style="position:absolute;right:-60px;top:-40px;width:380px"><path d="M40 60 h180 a40 40 0 0 1 40 40 v60 a40 40 0 0 0 40 40 h60"/></svg>
+    <div class="wrap">
+      <nav class="breadcrumb" aria-label="Breadcrumb"><a href={base}>Home</a><span>/</span> Services</nav>
+      <span class="eyebrow">What we fix</span>
+      <h1>Plumbing services for every Phoenix home</h1>
+      <p>One licensed crew, no subcontractors. Whatever's going on, you get an upfront flat-rate price before any work begins.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      {services.map((s) => (
+        <div class={`svc reveal${s.urgent ? ' urgent' : ''}`} id={s.id}>
+          <div class="ic"><Icon name={s.icon} size={32} sw={1.8} /></div>
+          <div>
+            <h3>{s.title}</h3>
+            <p>{s.detail}</p>
+            <ul>
+              {s.items.map((item) => (
+                <li><Icon name="check" size={16} sw={2.4} /> {item}</li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="surface-band">
+    <div class="wrap">
+      <div class="sec-head reveal"><span class="eyebrow">How it works</span><h2>Three steps, no guesswork</h2></div>
+      <div class="steps">
+        <div class="step reveal"><div class="no">1</div><h3>Call or request</h3><p>Talk to a real Phoenix plumber, not a call center. Tell us what's happening and we'll schedule a visit fast.</p></div>
+        <div class="step reveal"><div class="no">2</div><h3>Upfront quote</h3><p>We diagnose the problem and give you a flat-rate price in writing. The work starts only after you say yes.</p></div>
+        <div class="step reveal"><div class="no">3</div><h3>Fixed, usually same day</h3><p>Most repairs are done in one visit. We clean up after ourselves and back the work with a warranty.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <CtaBand heading="Not sure what's wrong? We'll figure it out." text="Describe the problem and get a straight answer — call now or send a request.">
+    Open 24 hours for emergencies · <a href={base + 'contact'} style="color:#fff;text-decoration:underline">Request service online</a>
+  </CtaBand>
+</Layout>

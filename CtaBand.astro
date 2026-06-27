@@ -1,0 +1,12 @@
+---
+import { site } from '../data/site.js';
+const { heading, text } = Astro.props;
+---
+<section class="cta-band">
+  <div class="wrap reveal">
+    <h2>{heading}</h2>
+    <p>{text}</p>
+    <a class="cta-num" href={site.phoneHref}>{site.phone}</a>
+    <div class="note"><slot>Open 24 hours for emergencies · Serving all of metro Phoenix</slot></div>
+  </div>
+</section>

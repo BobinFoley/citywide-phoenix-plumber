@@ -1,0 +1,35 @@
+---
+import Icon from './Icon.astro';
+import { site } from '../data/site.js';
+const base = import.meta.env.BASE_URL; // e.g. "/citywide-phoenix-plumber/"
+const { active } = Astro.props;
+const links = [
+  { href: '', label: 'Home', key: 'home' },
+  { href: 'services', label: 'Services', key: 'services' },
+  { href: 'about', label: 'Why us', key: 'about' },
+  { href: 'service-area', label: 'Service area', key: 'area' },
+  { href: 'contact', label: 'Contact', key: 'contact' },
+];
+---
+<header>
+  <div class="wrap nav">
+    <a class="brand" href={base} aria-label={`${site.name} home`}>
+      <span class="mark"><Icon name="logo" size={22} /></span>
+      <span>{site.name}<small>{site.tagline}</small></span>
+    </a>
+    <nav class="nav-links" id="navlinks" aria-label="Primary">
+      {links.map((l) => (
+        <a href={base + l.href} class:list={[active === l.key && 'active']}>{l.label}</a>
+      ))}
+    </nav>
+    <div class="nav-right">
+      <a class="nav-phone" href={site.phoneHref}>
+        <span class="lbl">Call now · 24/7</span>
+        <span class="num">{site.phone}</span>
+      </a>
+      <button class="menu-btn" id="menuBtn" aria-label="Toggle menu" aria-expanded="false">
+        <Icon name="menu" size={22} />
+      </button>
+    </div>
+  </div>
+</header>
